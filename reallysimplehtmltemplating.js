@@ -8,9 +8,14 @@ var rsht = function(runafter) {
 	$(".rsht").each(function (index) {
 		var filename = $(this).attr("src");
 		var element = $(this);
-		$.get(filename, function(data) {
-			element.html(data);
-			runafter();
+		$.ajax({
+			async: false,
+			type: 'GET',
+			url: filename,
+			success: function(data) {
+				element.html(data);
+			}
 		});
 	});
+	runafter();
 };
